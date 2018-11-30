@@ -25,13 +25,6 @@ socket.on('disconnect', function(){});
 //------------ REST Service -----------------
 
 restService.post("/echo", function(req, res) {
-  //-------------- Socket Emit to VPS Server ------------
-  var message = {
-    author: 'dialogflow Heroku',
-    text: 'imitacion completada'
-  };
-  socket.emit('new-message', message)
-
   //------------- DialogFlow Response -----------
   var speech =
     req.body.result &&
@@ -39,6 +32,14 @@ restService.post("/echo", function(req, res) {
     req.body.result.parameters.echoText
       ? req.body.result.parameters.echoText
       : "Seems like some problem. Speak again.";
+
+  //-------------- Socket Emit to VPS Server ------------
+  var message = {
+    author: 'dialogflow Heroku',
+    text: speech
+  };
+  socket.emit('new-message', message)
+
   return res.json({
     speech: speech,
     displayText: speech,
