@@ -1,5 +1,5 @@
 "use strict";
-
+var socket = require('socket.io-client')('http://209.182.218.174:8080');
 const express = require("express");
 const bodyParser = require("body-parser");
 
@@ -13,7 +13,26 @@ restService.use(
 
 restService.use(bodyParser.json());
 
+//---------WebSocket Events-------------
+
+socket.on('connect', function (socket) {
+    console.log('Connected!');
+});
+
+socket.on('event', function(data){});
+socket.on('disconnect', function(){});
+
+//------------ REST Service -----------------
+
 restService.post("/echo", function(req, res) {
+  //-------------- Socket Emit to VPS Server ------------
+  var message = {
+    author: 'dialogflow Heroku',
+    text: 'imitacion completada'
+  };
+  socket.emit('new-message', message)
+
+  //------------- DialogFlow Response -----------
   var speech =
     req.body.result &&
     req.body.result.parameters &&
@@ -30,7 +49,7 @@ restService.post("/echo", function(req, res) {
 restService.post("/audio", function(req, res) {
   var speech = "";
   switch (req.body.result.parameters.AudioSample.toLowerCase()) {
-    //Speech Synthesis Markup Language 
+    //Speech Synthesis Markup Language
     case "music one":
       speech =
         '<speak><audio src="https://actions.google.com/sounds/v1/cartoon/slide_whistle.ogg">did not get your audio file</audio></speak>';

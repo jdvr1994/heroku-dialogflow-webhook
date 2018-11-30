@@ -8,7 +8,19 @@
   },
   "author": "Sunil Syal",
   "dependencies": {
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1",
     "body-parser": "^1.15.0",
     "express": "^4.13.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdvr1994/heroku-dialogflow-webhook.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jdvr1994/heroku-dialogflow-webhook/issues"
+  },
+  "homepage": "https://github.com/jdvr1994/heroku-dialogflow-webhook#readme"
 }
