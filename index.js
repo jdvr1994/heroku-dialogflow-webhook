@@ -41,7 +41,8 @@ restService.post("/echo", function(req, res) {
   socket.emit('light-mode', message)
 
   return res.json({
-    speech: speech,
+    //speech: speech,
+    speech: "ok",
     displayText: speech,
     source: "webhook-echo-sample"
   });
