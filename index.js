@@ -36,9 +36,9 @@ restService.post("/echo", function(req, res) {
   //-------------- Socket Emit to VPS Server ------------
   var message = {
     author: 'dialogflow Heroku',
-    text: speech
+    modo: 0
   };
-  socket.emit('new-message', message)
+  socket.emit('light-mode', message)
 
   return res.json({
     speech: speech,
