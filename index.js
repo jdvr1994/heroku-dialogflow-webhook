@@ -34,18 +34,48 @@ restService.post("/echo", function(req, res) {
       : "Seems like some problem. Speak again.";
 
   //-------------- Socket Emit to VPS Server ------------
-  var message = {
-    author: 'dialogflow Heroku',
-    modo: 0
-  };
-  socket.emit('light-mode', message)
+
+
+
+  if(str.search("encender luces")>=0){
+
+    var message = {
+      author: 'dialogflow Heroku',
+      modo: 1
+    };
+
+    socket.emit('light-mode', message)
+
+    return res.json({
+      //speech: speech,
+      speech: "luces encendidas",
+      displayText: "luces encendidas",
+      source: "webhook-echo-sample"
+    });
+  }
+
+  if(str.search("apagar luces")>=0){
+    var message = {
+      author: 'dialogflow Heroku',
+      modo: 0
+    };
+
+    socket.emit('light-mode', message)
+
+    return res.json({
+      //speech: speech,
+      speech: "luces apagadas",
+      displayText: "luces apagadas",
+      source: "webhook-echo-sample"
+    });
+  }
 
   return res.json({
-    //speech: speech,
-    speech: "ok",
+    speech: speech,
     displayText: speech,
     source: "webhook-echo-sample"
   });
+
 });
 
 restService.listen(process.env.PORT || 8000, function() {
