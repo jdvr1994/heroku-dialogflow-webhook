@@ -37,7 +37,7 @@ restService.post("/echo", function(req, res) {
 
 
 
-  if(str.search("encender luces")>=0){
+  if(speech.search("encender luces")>=0){
 
     var message = {
       author: 'dialogflow Heroku',
@@ -47,14 +47,13 @@ restService.post("/echo", function(req, res) {
     socket.emit('light-mode', message)
 
     return res.json({
-      //speech: speech,
       speech: "luces encendidas",
       displayText: "luces encendidas",
       source: "webhook-echo-sample"
     });
   }
 
-  if(str.search("apagar luces")>=0){
+  if(speech.search("apagar luces")>=0){
     var message = {
       author: 'dialogflow Heroku',
       modo: 0
@@ -63,7 +62,6 @@ restService.post("/echo", function(req, res) {
     socket.emit('light-mode', message)
 
     return res.json({
-      //speech: speech,
       speech: "luces apagadas",
       displayText: "luces apagadas",
       source: "webhook-echo-sample"
