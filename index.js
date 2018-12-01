@@ -37,7 +37,7 @@ restService.post("/echo", function(req, res) {
 
 
 
-  if(speech.search("Encender luces")>=0){
+  if(speech.toUpperCase().search("ENCENDER LUCES")>=0){
 
     var message = {
       author: 'dialogflow Heroku',
@@ -53,7 +53,7 @@ restService.post("/echo", function(req, res) {
     });
   }
 
-  if(speech.search("Apagar luces")>=0){
+  if(speech.toUpperCase().search("APAGAR LUCES")>=0){
     var message = {
       author: 'dialogflow Heroku',
       modo: 0
